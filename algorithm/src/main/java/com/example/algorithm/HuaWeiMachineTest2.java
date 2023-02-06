@@ -35,6 +35,36 @@ public class HuaWeiMachineTest2 {
     //****hj16******hj24****hj28***hj32**hj50******************************
 
     /**
+     * HJ52 计算字符串的编辑距离
+     * 动态规划
+     */
+    public static void hj52() {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            String s1 = scanner.nextLine();
+            String s2 = scanner.nextLine();
+            int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+            dp[0][0] = 0;
+            for (int i = 1; i < dp.length; i++) {
+                dp[i][0] = i;
+            }
+            for (int i = 1; i < dp[0].length; i++) {
+                dp[0][i] = i;
+            }
+            for (int i = 1; i < dp.length; i++) {
+                for (int j = 1; j < dp[0].length; j++) {
+                    if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+                        dp[i][j] = dp[i - 1][j - 1];
+                    } else {
+                        dp[i][j] = Math.min(dp[i - 1][j - 1] + 1, Math.min(dp[i][j - 1] + 1, dp[i - 1][j] + 1));
+                    }
+                }
+            }
+            System.out.println(dp[s1.length()][s2.length()]);
+        }
+    }
+
+    /**
      * HJ50 四则运算
      * 先算括号里面的，再算乘除，最后算加减
      * 未完成
@@ -180,8 +210,8 @@ public class HuaWeiMachineTest2 {
     /**
      * HJ32 密码截取
      * 动态规划
-     * https://blog.nowcoder.net/n/1d36e8f19915468db8e1375c61c3aa2c?f=comment
-     * https://blog.nowcoder.net/n/74a83d052c2d4742a24984169aa3e244?f=comment
+     * <a href="https://blog.nowcoder.net/n/1d36e8f19915468db8e1375c61c3aa2c?f=commen<a href="t">...</a>
+     * ">* https://blog.nowcoder.net/n/74a83d052c2d4742a2498416</a>9aa3e244?f=comment
      */
     public static void hj32Two() {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));

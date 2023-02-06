@@ -11,8 +11,7 @@ public class AlgorithmTest {
 
     @Test
     public void hj01() {
-        System.out.println("--------------");
-        System.out.println("this is test 2");
-        System.out.println("**************");
+        int[] arr = new int[]{1, 5, 2, 4, 3};
+        DynamicProgramming.longestIncreaseSub1(arr);
     }
 }
