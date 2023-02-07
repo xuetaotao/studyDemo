@@ -12,6 +12,6 @@ public class AlgorithmTest {
     @Test
     public void hj01() {
         int[] arr = new int[]{1, 5, 2, 4, 3};
-        DynamicProgramming.longestIncreaseSub1(arr);
+        DynamicProgramming.longestIncreaseSub3(arr);
     }
 }
