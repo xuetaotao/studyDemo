@@ -32,7 +32,11 @@ public class HuaWeiMachineTest2 {
 
 
     //**********************************困难(看答案后也不太懂)***************************************************
-    //****hj16******hj24****hj28***hj32**hj50******************************
+    //****hj16******hj24****hj28***hj32**hj50****hj52****hj54**********************
+
+    public static void hj54() {
+        hj50();
+    }
 
     /**
      * HJ52 计算字符串的编辑距离
@@ -344,8 +348,23 @@ public class HuaWeiMachineTest2 {
 
 
     //**********************************中等(看答案后可以自己默写写对)***************************************************
-    //********hj6*****hj18****hj26***hj32****hj41***hj43****hj44*************************
+    //********hj6*****hj18****hj26***hj32****hj41***hj43****hj44****hj53*********************
 
+    public static void hj53() {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()) {
+            int i = scanner.nextInt();
+            if (i == 1 || i == 2) {
+                System.out.println(-1);
+            } else if (i % 4 == 1 || i % 4 == 3) {
+                System.out.println(2);
+            } else if (i % 4 == 0) {
+                System.out.println(3);
+            } else if (i % 4 == 2) {
+                System.out.println(4);
+            }
+        }
+    }
 
     /**
      * HJ44 Sudoku(数独)
