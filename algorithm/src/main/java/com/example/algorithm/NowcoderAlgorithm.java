@@ -61,4 +61,26 @@ public class NowcoderAlgorithm {
         }
         return false;
     }
+
+    /**
+     * BM19 寻找峰值
+     * 时间复杂度O(logN),二分法最坏情况对整个数组连续二分，最多能分logN次
+     * 空间复杂度O(1),常数级变量，无额外辅助空间
+     */
+    public int bm19(int[] array) {
+        int left = 0;
+        int right = array.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            //右边是往下，不一定有坡峰
+            if (array[mid] > array[mid + 1]) {
+                right = mid;
+            } else {
+                //右边是往上，一定能找到波峰
+                left = mid + 1;
+            }
+        }
+        //其中一个波峰
+        return right;
+    }
 }
