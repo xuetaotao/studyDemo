@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.studydemo.bean.UserBean
 import com.example.studydemo.databinding.ActivityMainBinding
+import com.example.studydemo.thirdLibrary.PermissionXStudy
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         mBinding.button.setOnClickListener {
-            mainViewModel.getUser("chaozhouzhang", "123456")
+            PermissionXStudy.permissionXTest(this)
         }
+    }
+
+    fun netTest() {
+        mainViewModel.getUser("chaozhouzhang", "123456")
     }
 }

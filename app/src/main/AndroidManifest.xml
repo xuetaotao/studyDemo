@@ -16,6 +16,9 @@
     <!-- 安装应用程序 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <!-- 运行时权限申请，Android6.0以后 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"

@@ -88,4 +88,7 @@ dependencies {
 
     // mmkv
     implementation 'com.tencent:mmkv:1.2.14'
+
+    // PermissionX  https://github.com/guolindev/PermissionX
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
 }
