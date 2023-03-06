@@ -163,6 +163,8 @@ public class SortAlgorithm {
         for (int j = 0; j < helpArr.length; j++) {
             arr[left + j] = helpArr[j];//这里arr的数组初始长度不一定是0
         }
+        //上面的for循环可以用这个替代
+        //System.arraycopy(helpArr, 0, arr, left, helpArr.length);
     }
 
 
