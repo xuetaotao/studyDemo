@@ -128,4 +128,25 @@ public class NowcoderAlgorithm {
         return res % mod;
     }
 
+    /**
+     * BM21 旋转数组的最小数字
+     */
+    public int bm21(int[] array) {
+        int left = 0;
+        int right = array.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            //最小的数字在mid右边
+            if (array[mid] > array[right]) {
+                left = mid + 1;
+            } else if (array[mid] == array[right]) {
+                //无法判断，一个一个试
+                right--;
+            } else {
+                //最小数字要么是mid要么在mid左边
+                right = mid;
+            }
+        }
+        return array[left];
+    }
 }
