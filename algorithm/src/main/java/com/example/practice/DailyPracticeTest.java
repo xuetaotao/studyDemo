@@ -2,13 +2,25 @@ package com.example.practice;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class DailyPracticeTest {
 
     @Test
     public void test() {
-        System.out.printf(captureName2("texts"));
+//        System.out.printf(captureName2("texts"));
+        System.out.println(containsTest());
+    }
+
+    public static boolean containsTest() {
+        List<String> list = new ArrayList<>();
+        list.add("aa");
+        list.add("bb");
+        list.add("cc");
+        return list.contains(null);//false
+//        return list.contains("");//false
     }
 
     /**
