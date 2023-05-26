@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -14,7 +15,45 @@ public class DailyPracticeTest {
     public void test() {
 //        System.out.printf(captureName2("texts"));
 //        System.out.println(containsTest());
-        mapToString();
+//        mapToString();
+    }
+
+    public void iteratorUseCorrect() {
+        List<String> list = new ArrayList<>();
+        list.add("aa");
+        list.add("bb");
+        list.add("cc");
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String next = iterator.next();
+            if (next.equals("bb")) {
+                iterator.remove();
+            }
+        }
+        for (String s : list) {
+            System.out.println(s);
+        }
+        //aa cc
+    }
+
+
+    public void testIteratorUseError() {
+        List<String> list = new ArrayList<>();
+        list.add("aa");
+        list.add("bb");
+        list.add("cc");
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String next = iterator.next();
+            if (next.equals("bb")) {
+                list.remove(next);
+            }
+        }
+        for (String s : list) {
+            System.out.println(s);
+        }
+        //这里没有出问题是因为没有涉及到并发场景和共享变量
+        //aa cc
     }
 
     public static boolean containsTest() {

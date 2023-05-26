@@ -6,7 +6,37 @@ class DailyPracticeTestKt {
 
     @Test
     fun test() {
-        testTakeWhile()
+        testIterator2()
+    }
+
+    fun testIterator2() {
+        val list = mutableListOf<Int>(1, 2, 3, 4, 5)
+        val iterator = list.iterator()
+        while (iterator.hasNext()) {
+            val i = iterator.next()
+            if (i == 3) {
+                iterator.remove()
+            }
+        }
+        list.forEach {
+            println(it)
+        }
+        //1 2 4 5
+    }
+
+    fun testIterator() {
+        val list = listOf(1, 2, 3, 4, 5)
+        val iterator = list.toMutableList().iterator()
+        while (iterator.hasNext()) {
+            val i = iterator.next()
+            if (i == 3) {
+                iterator.remove()
+            }
+        }
+        list.forEach {
+            println(it)
+        }
+        //1 2 3 4 5
     }
 
     /**
