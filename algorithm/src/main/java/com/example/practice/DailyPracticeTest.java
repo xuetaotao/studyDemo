@@ -2,6 +2,7 @@ package com.example.practice;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,7 +17,16 @@ public class DailyPracticeTest {
 //        System.out.printf(captureName2("texts"));
 //        System.out.println(containsTest());
 //        mapToString();
+        getFilePrefix();
     }
+
+    public void getFilePrefix() {
+        File f = new File("TileTest.java");
+        String fileName = f.getName();
+        String prefix = fileName.substring(fileName.lastIndexOf("."));
+        System.out.println(prefix);
+    }
+
 
     public void iteratorUseCorrect() {
         List<String> list = new ArrayList<>();
