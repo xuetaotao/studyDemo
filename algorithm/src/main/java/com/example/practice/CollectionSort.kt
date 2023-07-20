@@ -2,7 +2,6 @@ package com.example.practice
 
 import org.junit.Test
 import java.util.Arrays
-import java.util.Comparator
 
 /**
  * 大多数内置类型是可比较的：
@@ -13,16 +12,43 @@ class CollectionSort {
 
     @Test
     fun test() {
-//        versionCompareTo()
-//        userCompareTo()
-//        studentCompare()
-//        sortMethod()
-//        sortedMethod()
-//        sortedMethod2()
-//        sortByMethod()
-//        sortedByMethod()
-//        sortWith()
-        sortedWith()
+        testIterator()
+    }
+
+    /**
+     * List删除元素2
+     */
+    fun testIterator2() {
+        val list = mutableListOf<Int>(1, 2, 3, 4, 5)
+        val iterator = list.iterator()
+        while (iterator.hasNext()) {
+            val i = iterator.next()
+            if (i == 3) {
+                iterator.remove()
+            }
+        }
+        list.forEach {
+            println(it)
+        }
+        //1 2 4 5
+    }
+
+    /**
+     * List删除元素
+     */
+    fun testIterator() {
+        val list = listOf(1, 2, 3, 4, 5)
+        val iterator = list.toMutableList().iterator()
+        while (iterator.hasNext()) {
+            val i = iterator.next()
+            if (i == 3) {
+                iterator.remove()
+            }
+        }
+        list.forEach {
+            println(it)
+        }
+        //1 2 3 4 5
     }
 
     /**
