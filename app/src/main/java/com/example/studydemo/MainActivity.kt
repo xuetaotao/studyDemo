@@ -28,20 +28,7 @@ class MainActivity : AppCompatActivity() {
         mBinding.button.setOnClickListener {
 //            PermissionXStudy.permissionXTest(this)
             datePickerDialogUse()
-//            calendarViewUse()
         }
-    }
-
-    private fun calendarViewUse() {
-        val calendarView = CalendarView(this)
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            Toast.makeText(
-                this@MainActivity,
-                "${year}年${month + 1}月${dayOfMonth}日",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        calendarView.showContextMenu()
     }
 
     private fun datePickerDialogUse() {
