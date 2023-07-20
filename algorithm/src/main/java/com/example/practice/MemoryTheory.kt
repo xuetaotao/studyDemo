@@ -6,7 +6,7 @@ class MemoryTheory {
 
     @Test
     fun test() {
-        testStringList()
+        testQuoteList()
     }
 
     /************************************************************************************/
@@ -26,7 +26,8 @@ class MemoryTheory {
             QuoteModel("hui", false)
         )
         setQuoteModelListUpdate(list)
-        updateQuoteItem(2)
+//        updateQuoteItem(2)
+        replaceQuoteItem(2)
         println("-----originList------->")
         list.forEach {
             println(it)
@@ -49,6 +50,17 @@ class MemoryTheory {
     fun updateQuoteItem(position: Int) {
         quoteModelList[position].female = quoteModelList[position].female != true
         println("-----updateQuoteItem------->")
+        quoteModelList.forEach {
+            println(it)
+        }
+    }
+
+    //注意，这里与updateQuoteItem的不同在于：这里在堆中新建了一个对象，并将新对象的位置指针赋值给了quoteModelList，
+    // 所以quoteModelList和list 第2个位置指向的对象就是不再是同一个对象了，打印出来的值也就不一样了
+    fun replaceQuoteItem(position: Int){
+        val newQuote = QuoteModel("hui", !quoteModelList[position].female)
+        quoteModelList[position] = newQuote
+        println("-----replaceQuoteItem------->")
         quoteModelList.forEach {
             println(it)
         }
