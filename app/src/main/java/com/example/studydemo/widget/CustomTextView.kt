@@ -12,6 +12,7 @@ import androidx.appcompat.widget.AppCompatTextView
 //- 方便Java调用者使用默认参数值
 //- 不需要写多个方法重载
 
+//练习API的使用
 class CustomTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

@@ -5,9 +5,13 @@ import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import com.example.studydemo.utils.MediaUtils
 import com.example.studydemo.utils.px
 
 //可以将任何单位转为px
@@ -62,6 +66,9 @@ class TestView(context: Context, attributes: AttributeSet? = null, defStyleAttr:
         path.fillType = Path.FillType.EVEN_ODD
     }
 
+    val bounds = RectF(20f.px, 20f.px, 20f.px + 200f.px, 20f.px + 200f.px)
+    val xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+
     override fun onDraw(canvas: Canvas) {
         canvas.drawLine(100f, 100f, 200f, 200f, paint)
         //整个View的宽和高
@@ -69,5 +76,13 @@ class TestView(context: Context, attributes: AttributeSet? = null, defStyleAttr:
         val height = height.toFloat()
         canvas.drawCircle((width / 2), height / 2, RADIUS, paint)
         canvas.drawPath(path, paint)
+
+        //离屏缓冲，画圆形头像
+        val count = canvas.saveLayer(bounds, null)
+        canvas.drawOval(bounds, paint)
+        paint.xfermode = xfermode
+        canvas.drawBitmap(MediaUtils.getAvatar(context, 200f.px.toInt()), 20f.px, 20f.px, paint)
+        paint.xfermode = null
+        canvas.restoreToCount(count)
     }
 }
