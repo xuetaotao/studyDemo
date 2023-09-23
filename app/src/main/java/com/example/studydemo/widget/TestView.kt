@@ -8,6 +8,7 @@ import android.graphics.Path
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
+import android.graphics.PathMeasure
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -42,6 +43,7 @@ class TestView(context: Context, attributes: AttributeSet? = null, defStyleAttr:
     //抗锯齿效果打开
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val path = Path()
+    lateinit var pathMeasure: PathMeasure
 
     /**
      * View的尺寸发生变化的时候这个方法会调用
@@ -64,6 +66,7 @@ class TestView(context: Context, attributes: AttributeSet? = null, defStyleAttr:
         //默认是WINDING，镂空主要用Path.FillType.EVEN_ODD，使用Path.FillType.WINDING的话还需要计算各种规则
         //INVERSE_EVEN_ODD就是EVEN_ODD的反规则
         path.fillType = Path.FillType.EVEN_ODD
+        pathMeasure = PathMeasure(path, false)
     }
 
     val bounds = RectF(20f.px, 20f.px, 20f.px + 200f.px, 20f.px + 200f.px)
@@ -84,5 +87,13 @@ class TestView(context: Context, attributes: AttributeSet? = null, defStyleAttr:
         canvas.drawBitmap(MediaUtils.getAvatar(context, 200f.px.toInt()), 20f.px, 20f.px, paint)
         paint.xfermode = null
         canvas.restoreToCount(count)
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        val widthSize = MeasureSpec.getSize(widthMeasureSpec)//取出宽度的确切数值
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)//取出宽度的测量模式
+        //如果对View的宽高进行修改了要保存
+        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
     }
 }
