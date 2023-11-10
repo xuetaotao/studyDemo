@@ -2,7 +2,6 @@ package com.example.studydemo
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.widget.CalendarView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -20,8 +19,8 @@ class MainActivity : AppCompatActivity() {
         val mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         mainViewModel.userLiveData.observe(this, object : Observer<UserBean> {
-            override fun onChanged(t: UserBean?) {
-                mBinding.textView.text = t?.nickname
+            override fun onChanged(value: UserBean) {
+                mBinding.textView.text = value.nickname
             }
         })
 
