@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.example.studydemo.androidStudy.FirstFragment
 import com.example.studydemo.bean.UserBean
 import com.example.studydemo.databinding.ActivityMainBinding
 import java.util.Calendar
@@ -28,6 +29,14 @@ class MainActivity : AppCompatActivity() {
 //            PermissionXStudy.permissionXTest(this)
             datePickerDialogUse()
         }
+        fragmentTest()
+    }
+
+    private fun fragmentTest() {
+        val transaction = supportFragmentManager.beginTransaction()
+        val firstFragment = FirstFragment.newInstance()
+        transaction.add(R.id.fragment_container_view, firstFragment)
+        transaction.commit()
     }
 
     private fun datePickerDialogUse() {
