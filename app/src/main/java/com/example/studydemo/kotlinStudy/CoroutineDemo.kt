@@ -2,10 +2,12 @@ package com.example.studydemo.kotlinStudy
 
 import com.example.studydemo.bean.UserBean
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
@@ -14,6 +16,16 @@ import kotlin.coroutines.suspendCoroutine
 
 @SuppressWarnings("unused")
 class CoroutineDemo {
+
+    suspend fun withContextDemo() {
+        withContext(Dispatchers.IO) {
+            delay(1000)
+        }
+    }
+
+    fun coroutineScopeDemo(){
+
+    }
 
     suspend fun suspendCoroutineDemo() {
         suspendCoroutine<UserBean> { continuation ->
