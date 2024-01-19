@@ -21,16 +21,6 @@ import kotlin.coroutines.suspendCoroutine
 class CoroutineDemo {
 
     @Test
-    fun test() {
-        coroutineScopeDemo()
-    }
-
-    suspend fun withContextDemo() {
-        withContext(Dispatchers.IO) {
-            delay(1000)
-        }
-    }
-
     fun coroutineScopeDemo() {
         runBlocking {
             launch {
@@ -65,6 +55,24 @@ class CoroutineDemo {
     fun letUsPrintln(title: String) {
         println("$title, Thread_name：${Thread.currentThread().name}")
     }
+
+    //没看懂为啥? 额，这不就是类似网络请求拿到结果后再更新UI。。
+    @Test
+    fun withContextDemo() {
+        runBlocking {
+            letUsPrintln("start!-主线程")
+            withContext(Dispatchers.IO) {
+                delay(1000L)
+                letUsPrintln("111-子线程!")
+            }
+            letUsPrintln("end!-主线程")
+        }
+    }
+    /*
+    start!-主线程, Thread_name：main @coroutine#1
+    111-子线程!, Thread_name：DefaultDispatcher-worker-1 @coroutine#1
+    end!-主线程, Thread_name：main @coroutine#1
+     */
 
     suspend fun suspendCoroutineDemo() {
         suspendCoroutine<UserBean> { continuation ->
