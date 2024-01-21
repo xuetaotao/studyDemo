@@ -74,6 +74,39 @@ class CoroutineDemo {
     end!-主线程, Thread_name：main @coroutine#1
      */
 
+    //sampleStart
+// Sequentially executes doWorld followed by "Done"
+    @Test
+    fun main2() = runBlocking {
+        doWorld()
+        println("Done")
+    }
+
+    // Concurrently executes both sections
+    suspend fun doWorld() = coroutineScope { // this: CoroutineScope
+        launch {
+            delay(2000L)
+            println("World 2")
+        }
+        launch {
+            delay(1000L)
+            println("World 1")
+        }
+        println("Hello")
+    }
+//sampleEnd
+
+
+    @Test
+    fun main3() = runBlocking {
+        repeat(50_000) { // 启动大量的协程
+            launch {
+                delay(5000L)
+                print(".")
+            }
+        }
+    }
+
     suspend fun suspendCoroutineDemo() {
         suspendCoroutine<UserBean> { continuation ->
             val stu = UserBean("aa", "bb", "cc", "dd", 2)
