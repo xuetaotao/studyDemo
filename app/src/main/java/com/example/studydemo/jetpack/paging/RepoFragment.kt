@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.studydemo.databinding.FragmentRepoBinding
 import kotlinx.coroutines.launch
 
+/**
+ * 郭霖原创：Jetpack新成员，Paging3从吐槽到真香
+ * https://blog.csdn.net/guolin_blog/article/details/114707250
+ */
 class RepoFragment : Fragment() {
 
     //    private val viewModel by lazy { ViewModelProvider(this)[RepoViewModel::class.java] }

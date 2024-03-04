@@ -4,10 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.studydemo.net.GitHubService
 
-/**
- * 郭霖原创：Jetpack新成员，Paging3从吐槽到真香
- * https://blog.csdn.net/guolin_blog/article/details/114707250
- */
 //在继承PagingSource时需要声明两个泛型类型，第一个类型表示页数的数据类型，我们没有特殊需求，所以直接用整型就可以了。
 //第二个类型表示每一项数据（注意不是每一页）所对应的对象类型，这里使用刚才定义的Repo
 class RepoPagingSource(private val gitHubService: GitHubService) : PagingSource<Int, Repo>() {

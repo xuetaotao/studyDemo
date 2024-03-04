@@ -25,7 +25,6 @@ class RepoAdapter : PagingDataAdapter<Repo, RepoAdapter.ViewHolder>(COMPARATOR) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //TODO
         val repo = getItem(position)
         if (repo != null) {
             holder.name.text = repo.name
