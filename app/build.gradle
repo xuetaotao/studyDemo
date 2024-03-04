@@ -100,6 +100,14 @@ dependencies {
     // Optional - Integration with RxJava
     implementation 'androidx.compose.runtime:runtime-rxjava2'
 
+    // paging3 https://developer.android.com/jetpack/androidx/releases/paging?hl=zh-cn
+    def paging_version = "3.2.1"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+    // alternatively - without Android dependencies for tests
+    testImplementation "androidx.paging:paging-common:$paging_version"
+    // optional - Jetpack Compose integration
+    implementation "androidx.paging:paging-compose:3.3.0-alpha03"
+
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")

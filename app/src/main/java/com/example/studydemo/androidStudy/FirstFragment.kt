@@ -16,10 +16,9 @@ class FirstFragment : Fragment() {
         //这样写会报错，有问题
 //        val view = FragmentFirstBinding.inflate(inflater, container, true)
         val view = FragmentFirstBinding.inflate(layoutInflater)
-        view.tvHello.setOnClickListener {
-            //TODO 从一个跳转到第二个Fragment
-            view.tvHello.text = "我要跳了"
-        }
+//        view.tvHello.setOnClickListener {
+//            view.tvHello.text = "我要跳了"
+//        }
         return view.root
     }
 
