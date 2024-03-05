@@ -16,6 +16,9 @@ import kotlinx.coroutines.launch
 /**
  * 郭霖原创：Jetpack新成员，Paging3从吐槽到真香
  * https://blog.csdn.net/guolin_blog/article/details/114707250
+ *
+ * Google官方Demo：
+ * https://github.com/android/architecture-components-samples/tree/main/PagingSample
  */
 class RepoFragment : Fragment() {
 
