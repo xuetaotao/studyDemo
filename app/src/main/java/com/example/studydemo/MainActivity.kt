@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.studydemo.databinding.ActivityMainBinding
-import com.example.studydemo.jetpack.paging.RepoFragment
+import com.example.studydemo.ui.MainPageFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        fragmentReplace(RepoFragment())
+        fragmentReplace(MainPageFragment())
     }
 
     private fun fragmentReplace(fragment: Fragment) {
