@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <!-- 安装应用程序 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- 友盟sdk使用，是否需要运行时权限申请没看 TODO   -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- 运行时权限申请，Android6.0以后 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -36,6 +38,15 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="um.66180041cac2a664de1b35e3" />
             </intent-filter>
         </activity>
         <activity android:name="com.example.studydemo.jetpack.compose.ComposeTutorialActivity" />

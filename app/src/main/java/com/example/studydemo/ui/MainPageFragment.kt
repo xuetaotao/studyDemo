@@ -2,6 +2,7 @@ package com.example.studydemo.ui
 
 import androidx.fragment.app.Fragment
 import com.example.studydemo.R
+import com.example.studydemo.androidStudy.FirstFragment
 import com.example.studydemo.base.BaseFragment
 import com.example.studydemo.base.setOnSingleClickListener
 import com.example.studydemo.databinding.FragmentMainPageBinding
@@ -15,8 +16,8 @@ class MainPageFragment : BaseFragment<FragmentMainPageBinding>() {
 
     override fun initView() {
         binding.btn.setOnSingleClickListener {
-//            fragmentReplace(RepoFragment())
-            ComposeTutorialActivity.newInstance(requireContext())
+            fragmentReplace(FirstFragment())
+//            ComposeTutorialActivity.newInstance(requireContext())
         }
     }
 

@@ -23,4 +23,12 @@ class MainActivity : AppCompatActivity() {
         transaction.add(R.id.fragment_container_view, fragment)
         transaction.commit()
     }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
 }
