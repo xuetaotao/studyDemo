@@ -16,8 +16,8 @@ class MainPageFragment : BaseFragment<FragmentMainPageBinding>() {
 
     override fun initView() {
         binding.btn.setOnSingleClickListener {
-            fragmentReplace(FirstFragment())
-//            ComposeTutorialActivity.newInstance(requireContext())
+//            fragmentReplace(FirstFragment())
+            ComposeTutorialActivity.newInstance(requireContext())
         }
     }
 
