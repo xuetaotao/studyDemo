@@ -9,6 +9,12 @@ class DailyPracticeTestKt {
         testForEach()
     }
 
+    @Test
+    fun compareSet() {
+        val testSet1 = setOf(1, 3, 5)
+        val testSet2 = setOf(5, 3, 1, 2)
+        println(testSet1 == testSet2)
+    }
 
     /**
      * 关于 kotlin 的 forEach 如何实现 break/continue 的思考:

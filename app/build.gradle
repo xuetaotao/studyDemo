@@ -153,4 +153,15 @@ dependencies {
     // 友盟统计SDK
     implementation 'com.umeng.umsdk:common:9.6.3'// 必选
     implementation 'com.umeng.umsdk:asms:1.8.0'// 必选
+
+    // https://github.com/LuckSiege/PictureSelector
+    // PictureSelector basic (Necessary)
+    implementation("io.github.lucksiege:pictureselector:v3.11.2")
+    // image compress library (Not necessary)
+//    implementation("io.github.lucksiege:compress:v3.11.2")
+    // uCrop library (Not necessary)
+//    implementation("io.github.lucksiege:ucrop:v3.11.2")
+    // simple camerax library (Not necessary)
+//    implementation("io.github.lucksiege:camerax:v3.11.2")
+
 }
