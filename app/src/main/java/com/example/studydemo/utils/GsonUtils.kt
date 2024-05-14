@@ -65,32 +65,32 @@ class Student(name: String, age: String, score: String) : Person(name, age)
 
 
 /**
-[
-{
-"destinationName": "US",
-"iconInfo": "infous",
-"curOrderModelId": "23123_sadsa_dasd2",
-"provider": "Truth",
-"networks": [
-"aa",
-"bb",
-"cc"
-],
-"apn": "apninfo"
-},
-{
-"destinationName": "CH",
-"iconInfo": "infoch",
-"curOrderModelId": "7897_sgas_27fs",
-"provider": "Truth",
-"networks": [
-"dd",
-"ee",
-"ff"
-],
-"apn": "apninfoch"
-}
-]
+ * [
+ *     {
+ *         "destinationName": "US",
+ *         "iconInfo": "infous",
+ *         "curOrderModelId": "23123_sadsa_dasd2",
+ *         "provider": "Truth",
+ *         "networks": [
+ *             "aa",
+ *             "bb",
+ *             "cc"
+ *         ],
+ *         "apn": "apninfo"
+ *     },
+ *     {
+ *         "destinationName": "CH",
+ *         "iconInfo": "infoch",
+ *         "curOrderModelId": "7897_sgas_27fs",
+ *         "provider": "Truth",
+ *         "networks": [
+ *             "dd",
+ *             "ee",
+ *             "ff"
+ *         ],
+ *         "apn": "apninfoch"
+ *     }
+ * ]
  */
 data class ESimModel(
     val apn: String?,

@@ -24,4 +24,6 @@ object MediaUtils {
         val color = context.getColor(R.color.white)
         val color2 = context.resources.getColor(R.color.white)
     }
+
+
 }

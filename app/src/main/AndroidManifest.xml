@@ -15,11 +15,20 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <!-- 安装应用程序 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <!-- 友盟sdk使用，是否需要运行时权限申请没看 TODO   -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- 运行时权限申请，Android6.0以后 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 友盟sdk使用，是否需要运行时权限申请没看 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:name=".App"
