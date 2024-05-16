@@ -28,7 +28,7 @@ class App : Application() {
 
     private fun initUmengSdk() {
         val appKey = "66180041cac2a664de1b35e3"
-        UMConfigure.setLogEnabled(true)
+        UMConfigure.setLogEnabled(false)
         UMConfigure.preInit(this, appKey, "Umeng-Debug")
         UMConfigure.init(
             this, appKey, "Umeng-Debug", UMConfigure.DEVICE_TYPE_PHONE, ""
