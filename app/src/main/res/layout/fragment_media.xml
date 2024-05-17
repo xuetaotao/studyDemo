@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:text="选择图片_自定义相册"
+        android:text="三方库选择图片(自定义相册)"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:padding="12dp"
-        android:text="选择图片_系统相册"
+        android:text="三方库选择图片(系统相册)"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_pic"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:padding="12dp"
-        android:text="拍照"
+        android:text="三方库拍照"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btn_photo_picker"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,10 +46,23 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:padding="12dp"
-        android:text="系统 PhotoPicker"
+        android:text="系统PhotoPicker"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/btn_permission"
+        app:layout_constraintStart_toEndOf="@+id/btn_camera"
+        app:layout_constraintTop_toBottomOf="@+id/btn_pic" />
+
+    <Button
+        android:id="@+id/btn_permission"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        android:text="权限申请"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_camera"
+        app:layout_constraintStart_toEndOf="@+id/btn_photo_picker"
         app:layout_constraintTop_toBottomOf="@+id/btn_pic" />
 
     <androidx.appcompat.widget.AppCompatImageView

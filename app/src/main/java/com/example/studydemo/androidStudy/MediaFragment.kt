@@ -1,8 +1,13 @@
 package com.example.studydemo.androidStudy
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.READ_MEDIA_IMAGES
+import android.Manifest.permission.READ_MEDIA_VIDEO
+import android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -32,9 +37,7 @@ class MediaFragment : Fragment() {
     private lateinit var binding: FragmentMediaBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentMediaBinding.inflate(layoutInflater)
         binding.btnPic.setOnSingleClickListener {
@@ -49,6 +52,9 @@ class MediaFragment : Fragment() {
         binding.btnPhotoPicker.setOnSingleClickListener {
             openAlbumsWithSystemPhotoPicker()
         }
+        binding.btnPermission.setOnSingleClickListener {
+            requestPermission()
+        }
         return binding.root
     }
 
@@ -60,10 +66,8 @@ class MediaFragment : Fragment() {
      * 3.Inject into any view fragment 和 Custom Inject into any view fragment，这两种方式测试总是有问题，暂时不用
      */
     private fun openAlbumWithThirdLibrary() {
-        PictureSelector
-            .create(this)
-            .openGallery(SelectMimeType.ofImage())
-//            .setSelectionMode(SelectModeConfig.SINGLE)
+        PictureSelector.create(this).openGallery(SelectMimeType.ofImage())
+            .setSelectionMode(SelectModeConfig.MULTIPLE)
             .setMaxSelectNum(3)
             .isMaxSelectEnabledMask(true)
             .setImageEngine(GlideEngine.createGlideEngine())
@@ -81,10 +85,8 @@ class MediaFragment : Fragment() {
      * 三方库pictureselector：使用系统的相册
      */
     private fun openSystemAlbumWithThirdLibrary() {
-        PictureSelector
-            .create(this)
-            .openSystemGallery(SelectMimeType.ofImage())
-            .setSelectionMode(SelectModeConfig.SINGLE)
+        PictureSelector.create(this).openSystemGallery(SelectMimeType.ofImage())
+//            .setSelectionMode(SelectModeConfig.MULTIPLE)//无效，系统相册不支持多选
             .forSystemResult(object : OnResultCallbackListener<LocalMedia> {
                 override fun onResult(result: ArrayList<LocalMedia>?) {
                     displayPictures(result)
@@ -100,8 +102,7 @@ class MediaFragment : Fragment() {
      * To take photos separately in the Navigation Fragment scene
      */
     private fun openCameraWithThirdLibrary() {
-        PictureSelector.create(this)
-            .openCamera(SelectMimeType.ofImage())
+        PictureSelector.create(this).openCamera(SelectMimeType.ofImage())
             .setLanguage(LanguageConfig.SYSTEM_LANGUAGE)
             .forResultActivity(object : OnResultCallbackListener<LocalMedia> {
                 override fun onResult(result: ArrayList<LocalMedia>?) {
@@ -181,6 +182,34 @@ class MediaFragment : Fragment() {
 //        val mediaType = ActivityResultContracts.PickVisualMedia.SingleMimeType("image/gif")
         pickMultipleMedia.launch(PickVisualMediaRequest(mediaType))
     }
+
+
+    // Register ActivityResult handler
+    private val requestPermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+            // Handle permission requests results
+            // See the permission example in the Android platform samples: https://github.com/android/platform-samples
+            results.entries.forEach {
+                Log.e("taotao-->", "${it.key} is ${it.value}")
+            }
+        }
+
+    private fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            //选择部分照片和视频：READ_MEDIA_IMAGES is false, READ_MEDIA_VIDEO is false, READ_MEDIA_VISUAL_USER_SELECTED is true
+            //全部允许：READ_MEDIA_IMAGES is true, READ_MEDIA_VIDEO is true, READ_MEDIA_VISUAL_USER_SELECTED is true
+            requestPermissions.launch(
+                arrayOf(
+                    READ_MEDIA_IMAGES, READ_MEDIA_VIDEO, READ_MEDIA_VISUAL_USER_SELECTED
+                )
+            )
+        } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions.launch(arrayOf(READ_MEDIA_IMAGES, READ_MEDIA_VIDEO))
+        } else {
+            requestPermissions.launch(arrayOf(READ_EXTERNAL_STORAGE))
+        }
+    }
+
 
     /**
      * 请求权限拒绝后跳转app应用信息详情页，让用户手动开启
