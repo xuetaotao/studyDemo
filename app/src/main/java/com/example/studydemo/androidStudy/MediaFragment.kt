@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -86,7 +87,7 @@ class MediaFragment : Fragment() {
      */
     private fun openSystemAlbumWithThirdLibrary() {
         PictureSelector.create(this).openSystemGallery(SelectMimeType.ofImage())
-//            .setSelectionMode(SelectModeConfig.MULTIPLE)//无效，系统相册不支持多选
+            .setSelectionMode(SelectModeConfig.MULTIPLE)
             .forSystemResult(object : OnResultCallbackListener<LocalMedia> {
                 override fun onResult(result: ArrayList<LocalMedia>?) {
                     displayPictures(result)
@@ -140,7 +141,7 @@ class MediaFragment : Fragment() {
      *
      * 您可以通过调用 ActivityResultContracts.PickVisualMedia.isPhotoPickerAvailable(context) 来验证照片选择器在给定设备上是否可用。
      */
-    private val pickMedia =
+    private val pickMedia: ActivityResultLauncher<PickVisualMediaRequest> =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             //选择单个媒体文件, Callback is invoked after the user selects a media item or closes the photo picker.
             if (uri != null) {
@@ -160,8 +161,8 @@ class MediaFragment : Fragment() {
     }
 
     //平台会限制您可以让用户在照片选择器中选择的文件数量上限。如需访问此限制，请调用 getPickImagesMaxLimit()。 在不支持照片选择器的设备上，系统会忽略此上限。
-    private val pickMultipleMedia =
-        registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
+    private val pickMultipleMedia: ActivityResultLauncher<PickVisualMediaRequest> =
+        registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(2)) { uris ->
             // Callback is invoked after the user selects media items or closes the photo picker.
             Log.e("taotao-->", "uris.size: ${uris?.size}")
             lifecycleScope.launch {

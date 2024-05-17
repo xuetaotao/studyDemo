@@ -9,9 +9,13 @@
         android:id="@+id/btn_pic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:padding="12dp"
         android:text="三方库选择图片(自定义相册)"
         android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/btn_pic_system"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,6 +24,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:autoSizeTextType="uniform"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:padding="12dp"
         android:text="三方库选择图片(系统相册)"
         android:textAllCaps="false"
@@ -32,6 +39,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:autoSizeTextType="uniform"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:padding="12dp"
         android:text="三方库拍照"
         android:textAllCaps="false"
@@ -44,26 +54,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:autoSizeTextType="uniform"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:padding="12dp"
         android:text="系统PhotoPicker"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@+id/btn_permission"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_camera"
-        app:layout_constraintTop_toBottomOf="@+id/btn_pic" />
+        app:layout_constraintTop_toTopOf="@+id/btn_camera" />
 
     <Button
         android:id="@+id/btn_permission"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:autoSizeTextType="uniform"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:padding="12dp"
         android:text="权限申请"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_photo_picker"
-        app:layout_constraintTop_toBottomOf="@+id/btn_pic" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_camera" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_image"
@@ -74,6 +88,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_camera" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
