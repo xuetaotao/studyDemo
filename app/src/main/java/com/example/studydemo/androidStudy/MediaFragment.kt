@@ -1,5 +1,6 @@
 package com.example.studydemo.androidStudy
 
+import android.Manifest
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.READ_MEDIA_IMAGES
 import android.Manifest.permission.READ_MEDIA_VIDEO
@@ -9,6 +10,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +20,8 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import androidx.core.content.contentValuesOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -31,6 +36,7 @@ import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import com.luck.picture.lib.language.LanguageConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
 
 
 class MediaFragment : Fragment() {
@@ -48,13 +54,16 @@ class MediaFragment : Fragment() {
             openSystemAlbumWithThirdLibrary()
         }
         binding.btnCamera.setOnSingleClickListener {
-            openCameraWithThirdLibrary()
+//            openCameraWithThirdLibrary()
+            requestCameraPermission {
+                openCamera(requireContext())
+            }
         }
         binding.btnPhotoPicker.setOnSingleClickListener {
             openAlbumsWithSystemPhotoPicker()
         }
         binding.btnPermission.setOnSingleClickListener {
-            requestPermission()
+            requestImagePermission()
         }
         return binding.root
     }
@@ -68,10 +77,8 @@ class MediaFragment : Fragment() {
      */
     private fun openAlbumWithThirdLibrary() {
         PictureSelector.create(this).openGallery(SelectMimeType.ofImage())
-            .setSelectionMode(SelectModeConfig.MULTIPLE)
-            .setMaxSelectNum(3)
-            .isMaxSelectEnabledMask(true)
-            .setImageEngine(GlideEngine.createGlideEngine())
+            .setSelectionMode(SelectModeConfig.MULTIPLE).setMaxSelectNum(3)
+            .isMaxSelectEnabledMask(true).setImageEngine(GlideEngine.createGlideEngine())
             .setLanguage(LanguageConfig.SYSTEM_LANGUAGE)
             .forResult(object : OnResultCallbackListener<LocalMedia> {
                 override fun onResult(result: ArrayList<LocalMedia>?) {
@@ -184,18 +191,63 @@ class MediaFragment : Fragment() {
         pickMultipleMedia.launch(PickVisualMediaRequest(mediaType))
     }
 
+    private val takePicture = registerForActivityResult(ActivityResultContracts.TakePicture()) {
+        if (it) {
+            //TODO
+        }
+    }
+
+    private fun requestCameraPermission(permissionsGrantedListener: (() -> Unit)? = null) {
+        this.permissionsGrantedListener = permissionsGrantedListener
+        requestPermissions.launch(arrayOf(Manifest.permission.CAMERA))
+    }
+
+    private fun openCamera(context: Context) {
+        val mimeType = "image/jpeg"
+        val fileName = "IMG_${System.currentTimeMillis()}.jpg"
+        val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val values = contentValuesOf(
+                Pair(MediaStore.MediaColumns.DISPLAY_NAME, fileName),
+                Pair(MediaStore.MediaColumns.MIME_TYPE, mimeType),
+                Pair(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DCIM)
+            )
+            context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        } else {
+            FileProvider.getUriForFile(
+                context,
+                context.applicationContext.packageName,
+                File(context.externalCacheDir, "/$fileName")
+            )
+        }
+        uri?.let {
+            takePicture.launch(it)
+        }
+    }
+
+    private var permissionsGrantedListener: (() -> Unit)? = null
 
     // Register ActivityResult handler
     private val requestPermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
             // Handle permission requests results
             // See the permission example in the Android platform samples: https://github.com/android/platform-samples
-            results.entries.forEach {
-                Log.e("taotao-->", "${it.key} is ${it.value}")
+            var allPermissionsGranted = true
+            run {
+                results.entries.forEach {
+                    Log.e("taotao-->", "${it.key} is ${it.value}")
+                    if (!it.value) {
+                        allPermissionsGranted = false
+                        return@run
+                    }
+                }
+            }
+            if (allPermissionsGranted) {
+                permissionsGrantedListener?.invoke()
             }
         }
 
-    private fun requestPermission() {
+    private fun requestImagePermission(permissionsGrantedListener: (() -> Unit)? = null) {
+        this.permissionsGrantedListener = permissionsGrantedListener
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             //选择部分照片和视频：READ_MEDIA_IMAGES is false, READ_MEDIA_VIDEO is false, READ_MEDIA_VISUAL_USER_SELECTED is true
             //全部允许：READ_MEDIA_IMAGES is true, READ_MEDIA_VIDEO is true, READ_MEDIA_VISUAL_USER_SELECTED is true
