@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import org.junit.Test
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
@@ -43,8 +44,7 @@ class CoroutineDemo {
             }
 
             letUsPrintln("Coroutine scope is over") // 4. 500 delay  coroutineScope
-        }
-        /* result:
+        }/* result:
         Task from coroutine scope Thread_name：main @coroutine#1
         Task from runBlocking Thread_name：main @coroutine#2
         Task from nested launch Thread_name：main @coroutine#3
@@ -52,7 +52,7 @@ class CoroutineDemo {
          */
     }
 
-    fun letUsPrintln(title: String) {
+    private fun letUsPrintln(title: String) {
         println("$title, Thread_name：${Thread.currentThread().name}")
     }
 
@@ -67,8 +67,7 @@ class CoroutineDemo {
             }
             letUsPrintln("end!-主线程")
         }
-    }
-    /*
+    }/*
     start!-主线程, Thread_name：main @coroutine#1
     111-子线程!, Thread_name：DefaultDispatcher-worker-1 @coroutine#1
     end!-主线程, Thread_name：main @coroutine#1
@@ -135,6 +134,33 @@ class CoroutineDemo {
     class ContinuationImpl(override val context: CoroutineContext) : Continuation<UserBean> {
         override fun resumeWith(result: Result<UserBean>) {
             println()
+        }
+    }
+
+    @Test
+    fun testWithout() {
+        runBlocking {
+            val result = withTimeoutOrNull(10000) {
+                repeat(1000) { i ->
+                    println("I'm sleeping $i times")
+                    delay(500)
+                }
+                "Done"
+            }
+            println("Result is $result")
+        }
+    }
+
+    @Test
+    fun test() {
+        runBlocking {
+            letUsPrintln("start!-主线程")
+
+            withContext(Dispatchers.IO) { // 启动一个新协程, 这是 this.launch
+                delay(1000L)
+                letUsPrintln("111-子线程!")
+            }
+            letUsPrintln("end!-主线程")
         }
     }
 }

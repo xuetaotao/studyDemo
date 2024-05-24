@@ -13,7 +13,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="12dp"
-        android:text="三方库选择图片(自定义相册)"
+        android:text="三方库选图(自定义相册)"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btn_pic_system"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="12dp"
-        android:text="三方库选择图片(系统相册)"
+        android:text="三方库选图(系统相册)"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_pic"
@@ -75,9 +75,24 @@
         android:padding="12dp"
         android:text="权限申请"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_system_camera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_camera" />
+
+    <Button
+        android:id="@+id/btn_system_camera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:autoSizeTextType="uniform"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:text="系统拍照"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_permission"
+        app:layout_constraintTop_toTopOf="@+id/btn_permission" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_image"
