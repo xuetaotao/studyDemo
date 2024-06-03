@@ -2,13 +2,10 @@ package com.example.studydemo.ui
 
 import androidx.fragment.app.Fragment
 import com.example.studydemo.R
-import com.example.studydemo.androidStudy.FirstFragment
-import com.example.studydemo.androidStudy.MediaFragment
+import com.example.studydemo.androidStudy.Android14Activity
 import com.example.studydemo.base.BaseFragment
 import com.example.studydemo.base.setOnSingleClickListener
 import com.example.studydemo.databinding.FragmentMainPageBinding
-import com.example.studydemo.jetpack.compose.ComposeTutorialActivity
-import com.example.studydemo.jetpack.paging.RepoFragment
 
 class MainPageFragment : BaseFragment<FragmentMainPageBinding>() {
     override fun setLayout(): FragmentMainPageBinding {
@@ -19,7 +16,8 @@ class MainPageFragment : BaseFragment<FragmentMainPageBinding>() {
         binding.btn.setOnSingleClickListener {
 //            fragmentReplace(FirstFragment())
 //            ComposeTutorialActivity.newInstance(requireContext())
-            fragmentReplace(MediaFragment())
+//            fragmentReplace(MediaFragment())
+            Android14Activity.startAndroid14Activity2(requireContext())
         }
     }
 

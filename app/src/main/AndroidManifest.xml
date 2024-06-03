@@ -60,7 +60,26 @@
                 <data android:scheme="um.66180041cac2a664de1b35e3" />
             </intent-filter>
         </activity>
+
         <activity android:name="com.example.studydemo.jetpack.compose.ComposeTutorialActivity" />
+
+        <activity
+            android:name="com.example.studydemo.androidStudy.Android14Activity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.action.APP_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".broadcastReceiver.Android14Receiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.action.Android14_Broadcast" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
