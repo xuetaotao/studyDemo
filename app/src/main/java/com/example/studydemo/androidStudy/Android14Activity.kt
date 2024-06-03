@@ -27,9 +27,17 @@ class Android14Activity : AppCompatActivity() {
         binding.btnClick.setOnClickListener {
 //            showToast(this, "Android14Activity 适配测试")
             localBroadcastManager(this)
+//            dynamicBroadcastInner(this)
         }
     }
 
+    /**
+     * LocalBroadcastManager测试
+     * 可以使用隐式 intent传送到未导出的组件
+     *
+     * Test 16: targeting Android 14, run on Android 14, 不崩溃，running ok.
+     * Test 17: targeting Android 14, run on Android 13, 不崩溃，running ok.
+     */
     private fun localBroadcastManager(context: Context) {
         showLog("---localBroadcastManager---")
         LocalBroadcastManager.getInstance(context).registerReceiver(
@@ -40,6 +48,26 @@ class Android14Activity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
         }, 1000)
+    }
+
+    /**
+     * 不能使用隐式 intent传送到未导出的组件
+     * Test 18: targeting Android 14, run on Android 14, 不崩溃，running ok.
+     * Test 19: targeting Android 14, run on Android 13, 不崩溃，running ok.
+     *
+     * 但是如果把下面代码中的setPackage去掉就启动不了广播了，但是不会崩溃
+     */
+    private fun dynamicBroadcastInner(context: Context) {
+        ContextCompat.registerReceiver(
+            context, customReceiver, IntentFilter(ACTION_DYNAMIC_BROADCAST),
+            ContextCompat.RECEIVER_NOT_EXPORTED
+        )
+        val intent = Intent(ACTION_DYNAMIC_BROADCAST).apply {
+            setPackage(context.packageName)
+        }
+        Handler(Looper.getMainLooper()).postDelayed({
+            sendBroadcast(intent)
+        }, 100)
     }
 
     companion object {
