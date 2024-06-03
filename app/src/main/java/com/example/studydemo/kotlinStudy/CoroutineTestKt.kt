@@ -21,6 +21,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 /**
  * 协程的并发问题处理
@@ -205,7 +206,8 @@ class CoroutineTestKt {
                 override fun onFailure(call: Call, e: IOException) {
                     val msg =
                         (e.message ?: "request fail") + "\nThread：\n" + Thread.currentThread().name
-                    cancellableContinuation.resume(msg)
+//                    cancellableContinuation.resume(msg)
+                    cancellableContinuation.resumeWithException(Exception(msg))
                 }
 
                 override fun onResponse(call: Call, response: Response) {
