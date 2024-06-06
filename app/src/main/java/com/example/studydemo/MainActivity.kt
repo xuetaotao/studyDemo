@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-        fragmentReplace(MainPageFragment())
+        fragmentAdd(MainPageFragment())
     }
 
-    private fun fragmentReplace(fragment: Fragment) {
+    private fun fragmentAdd(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container_view, fragment)
         transaction.commit()

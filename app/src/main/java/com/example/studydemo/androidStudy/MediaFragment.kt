@@ -33,6 +33,7 @@ import com.bumptech.glide.Glide
 import com.example.studydemo.base.setOnSingleClickListener
 import com.example.studydemo.databinding.FragmentMediaBinding
 import com.example.studydemo.utils.GlideEngine
+import com.example.studydemo.utils.showLog
 import com.luck.picture.lib.basic.PictureSelector
 import com.luck.picture.lib.config.SelectMimeType
 import com.luck.picture.lib.config.SelectModeConfig
@@ -55,6 +56,47 @@ import java.io.File
 class MediaFragment : Fragment() {
 
     private lateinit var binding: FragmentMediaBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        showLog("onCreate")
+//        pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
+    }
+
+    override fun onStart() {
+        super.onStart()
+        showLog("onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showLog("onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        showLog("onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        showLog("onStop")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        showLog("onDestroyView")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        showLog("onDestroy")
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        showLog("onDetach")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
