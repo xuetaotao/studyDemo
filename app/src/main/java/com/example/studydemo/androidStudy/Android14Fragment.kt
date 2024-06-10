@@ -1,6 +1,5 @@
 package com.example.studydemo.androidStudy
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
