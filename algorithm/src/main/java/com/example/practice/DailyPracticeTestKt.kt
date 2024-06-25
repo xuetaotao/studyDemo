@@ -1,12 +1,27 @@
 package com.example.practice
 
 import org.junit.Test
+import kotlin.math.ceil
 
 class DailyPracticeTestKt {
 
     @Test
     fun test() {
-        testForEach()
+//        testForEach()
+        println(ceil(4.0).toInt())
+        println(3.14.toInt())
+    }
+
+    @Test
+    fun arrayTest() {
+        //java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+        //错误使用
+        val array = arrayOf<String>()
+        array[0] = "one"
+        array[1] = "two"
+        array.forEach {
+            println(it)
+        }
     }
 
     @Test
